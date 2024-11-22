@@ -20,25 +20,22 @@ public:
         return noOfB >= m;
                                                                            }
     int minDays(vector<int>& arr, int m, int k) {
-         long long val = m * 1ll * k * 1ll;
-             int n = arr.size(); //size of the array
-                 if (val > n) return -1; //impossible case.
-                     //find maximum and minimum:
-                         int mini = INT_MAX, maxi = INT_MIN;
-                             for (int i = 0; i < n; i++) {
-                                     mini = min(mini, arr[i]);
-                                             maxi = max(maxi, arr[i]);
-                                                 }
-
-                                                     //apply binary search:
-                                                         int low = mini, high = maxi;
-                                                             while (low <= high) {
-                                                                     int mid = (low + high) / 2;
-                                                                             if (possible(arr, mid, m, k)) {
-                                                                                         high = mid - 1;
-                                                                                                 }
-                                                                                                         else low = mid + 1;
-                                                                                                             }
-                                                                                                                 return low;
-    }
+        int n = arr.size();
+        long long val = m*1ll*k*1ll;
+        if(val > n) return -1;
+        int maxi=INT_MIN, mini = INT_MAX;
+        for(int i=0; i<n; i++){
+            maxi = max(maxi, arr[i]);
+            mini = min(mini, arr[i]);
+        }
+        int low = mini, high = maxi;
+        while(low<=high){
+            int mid = (low+high)/2;
+            if( possible(arr,mid, m, k) ){
+                high = mid-1;
+            }else{
+                low = mid+1;
+            }
+        }
+        return low;}
 };
